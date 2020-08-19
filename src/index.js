@@ -11,6 +11,7 @@ import { ThemeProvider } from "styled-components";
 
 const App = () => {
   const [useDarkTheme, setUseDarkTheme] = useState(false);
+  const [useShowModal, setUseShowModal] = useState(false);
 
   return (
     <ThemeProvider theme={useDarkTheme ? darkTheme : defaultTheme}>
@@ -19,6 +20,12 @@ const App = () => {
         onClick={() => setUseDarkTheme(!useDarkTheme)}
       >
         Toggle Dark Theme
+      </button>
+      <button
+        style={{ margin: "0 16px 24px", padding: "8px", background: "none" }}
+        onClick={() => setUseShowModal(!useShowModal)}
+      >
+        Show Modal
       </button>
       <div
         style={{
@@ -32,6 +39,10 @@ const App = () => {
           justifyContent: "space-around",
         }}
       >
+        <SignInModal
+          useShowModal={useShowModal}
+          setUseShowModal={setUseShowModal}
+        ></SignInModal>
         <PrimaryButton modifiers={["small", "error", "primaryButtonError"]}>
           Hello world
         </PrimaryButton>
@@ -39,8 +50,6 @@ const App = () => {
           Goodbye world
         </SecondaryButton>
         <TertiaryButton>Hey world</TertiaryButton>
-
-        <SignInModal></SignInModal>
       </div>
       <GlobalStyle />
     </ThemeProvider>
